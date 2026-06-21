@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study — [Project Name]</title>
+<meta name="description" content="[Project Name] — problem, solution, architecture, and measurable impact." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#060912;--text:#e8ecf6;--muted:#9aa3b8;--faint:#6b7488;
+    --teal:#5eead4;--indigo:#8896ff;--border:rgba(255,255,255,0.09);
+    --display:'Space Grotesk',sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:
+      radial-gradient(900px 500px at 80% -10%, rgba(136,150,255,0.12), transparent 60%),
+      radial-gradient(700px 420px at 5% 0%, rgba(94,234,212,0.09), transparent 58%), var(--ink);
+    color:var(--text);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:820px;margin:0 auto;padding:64px 24px 96px;}
+  a{color:var(--teal);}
+  .back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--muted);text-decoration:none;margin-bottom:36px;}
+  .back:hover{color:var(--teal);}
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);}
+  h1{font-family:var(--display);font-size:clamp(2rem,5vw,2.8rem);font-weight:700;letter-spacing:-.02em;margin:12px 0 10px;}
+  .lede{color:var(--muted);font-size:1.12rem;max-width:640px;}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0 8px;}
+  .metric{border:1px solid var(--border);border-radius:14px;padding:18px 16px;background:rgba(255,255,255,0.035);backdrop-filter:blur(10px);}
+  .metric b{font-family:var(--display);font-size:1.6rem;display:block;background:linear-gradient(120deg,var(--teal),var(--indigo));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .metric span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);}
+  h2{font-family:var(--display);font-size:1.3rem;font-weight:600;margin:44px 0 12px;}
+  p{color:var(--muted);} strong{color:var(--text);}
+  ul{color:var(--muted);padding-left:20px;} li{margin:7px 0;}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--muted);background:rgba(255,255,255,0.06);border:1px solid var(--border);padding:6px 11px;border-radius:8px;}
+  .figure{margin:16px 0;border:1px dashed rgba(255,255,255,0.2);border-radius:14px;min-height:260px;display:grid;place-items:center;color:var(--faint);font-family:var(--mono);font-size:12.5px;text-align:center;padding:24px;background:linear-gradient(180deg,rgba(136,150,255,0.05),rgba(94,234,212,0.03));}
+  .impact{margin-top:36px;padding:22px 24px;border-radius:16px;background:linear-gradient(120deg,rgba(94,234,212,0.14),rgba(136,150,255,0.14));border:1px solid rgba(94,234,212,0.25);}
+  .impact .kick{color:var(--teal);}
+  .impact p{color:var(--text);font-size:1.05rem;font-weight:500;margin-top:8px;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;text-decoration:none;}
+  .btn-p{background:linear-gradient(135deg,var(--teal),var(--indigo));color:#06121a;}
+  .btn-g{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:var(--text);}
+  hr{border:none;border-top:1px solid var(--border);margin:48px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- When embedded in the portfolio viewer this scrolls; standalone it links home. -->
+  <a class="back" href="../index.html">← Back to portfolio</a>
+
+  <p class="kick">Case study · [Category — e.g. Agentic RAG]</p>
+  <h1>[Project Name]</h1>
+  <p class="lede">[One-line summary of what the product does and who it's for.]</p>
+
+  <div class="metrics">
+    <div class="metric"><b>[30 min]</b><span>[faster / query]</span></div>
+    <div class="metric"><b>[93%]</b><span>[accuracy]</span></div>
+    <div class="metric"><b>[100+]</b><span>[hrs / month saved]</span></div>
+  </div>
+
+  <h2>Context &amp; problem</h2>
+  <p>[What was broken, who felt the pain, and why existing tools couldn't solve it. Quantify the cost of the status quo.]</p>
+
+  <h2>My role</h2>
+  <p>[What you owned as PM — discovery, prioritisation, eval design, stakeholder alignment, GTM. Name the team and how you worked with them.]</p>
+
+  <h2>Solution &amp; approach</h2>
+  <p>[The product decision and the system behind it. Keep it crisp: what the user does, what the AI does, and where humans stay in the loop.]</p>
+  <ul>
+    <li>[Key decision 1 — e.g. agentic orchestration with LangGraph]</li>
+    <li>[Key decision 2 — e.g. retrieval + memory strategy]</li>
+    <li>[Key decision 3 — e.g. evaluation harness and guardrails]</li>
+  </ul>
+
+  <h2>Architecture</h2>
+  <div class="figure">Drop your architecture diagram here<br>(replace this block with an &lt;img&gt; or an embedded SVG / diagram)</div>
+
+  <h2>Tech stack</h2>
+  <div class="tags">
+    <span class="tag">[LangGraph]</span><span class="tag">[Python]</span><span class="tag">[FastAPI]</span>
+    <span class="tag">[Qdrant]</span><span class="tag">[Postgres]</span><span class="tag">[GCP]</span>
+  </div>
+
+  <h2>Evaluation</h2>
+  <p>[How you measured quality — golden sets, field-level accuracy, human review rate — and how you kept it reliable in production.]</p>
+
+  <div class="impact">
+    <p class="kick">Business impact</p>
+    <p>[The headline result in one sentence — turnaround reduced, hours saved, accuracy achieved, revenue or risk impact.]</p>
+  </div>
+
+  <div class="cta-row">
+    <a class="btn btn-p" href="#" target="_blank" rel="noreferrer">Live demo →</a>
+    <a class="btn btn-g" href="#" target="_blank" rel="noreferrer">View on GitHub</a>
+  </div>
+
+  <hr />
+  <p style="font-size:13px;color:var(--faint);">This is a reusable template. Duplicate it as <strong>pages/&lt;project&gt;.html</strong>, fill in the bracketed fields, and the portfolio's <strong>Case study</strong> button will open it automatically.</p>
+</div>
+</body>
+</html>
