@@ -247,7 +247,7 @@
       <button class="nav-link" data-scroll="contact">Contact</button>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary btn-sm" href="https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing" download id="nav-resume">Resume</a>
+      <a class="btn btn-primary btn-sm" ahref="https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing" download id="nav-resume">Resume</a>
     </div>
     <button class="nav-burger" id="burger" aria-label="Open menu" aria-expanded="false">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -260,7 +260,7 @@
     <button class="nav-mobile-link" data-scroll="skills">Skills</button>
     <button class="nav-mobile-link" data-scroll="writing">Writing</button>
     <button class="nav-mobile-link" data-scroll="contact">Contact</button>
-    <a class="btn btn-primary" href="https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing" download>Download Resume</a>
+    <a class="btn btn-primary" ahref="https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing" download>Download Resume</a>
   </div>
 </header>
 
@@ -278,7 +278,7 @@
         <div class="hero-actions">
           <button class="btn btn-primary" data-scroll="projects">View Projects
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></button>
-          <a class="btn btn-ghost" href="https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing" download>
+          <a class="btn btn-ghost" ahref="https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing" download>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> Download Resume</a>
           <button class="btn btn-ghost" data-scroll="contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Contact Me</button>
@@ -429,18 +429,15 @@ const STRENGTHS = [
   ["Stakeholder Management","M9 11a3 3 0 100-6 3 3 0 000 6zM3 20a6 6 0 0112 0M17 11a3 3 0 100-6M15 14a6 6 0 016 6"],
 ];
 const EXPERIENCE = [
-  {role:"AI Product Manager",org:"[ICICI Bank]",period:"Present",
+  {role:"Senior AI Product Manager",org:"[ICICI Bank]",period:"Present",
    summary:"Own the AI product portfolio across GenAI and agentic systems — from discovery and prioritisation to launch and post-launch evaluation.",
    impact:["Built AI-powered compliance solutions that reduced manual effort by 100+ hours / month.","Defined evaluation frameworks and KPIs to keep LLM outputs accurate and audit-ready.","Aligned engineering, risk, and business stakeholders around a single AI roadmap."]},
-  {role:"Product Manager — Conversational AI",org:"[Company Name]",period:"[Year — Year]",
-   summary:"Led conversational and retrieval-augmented products serving customers across multiple digital channels.",
-   impact:["Led development of Generative AI solutions for internal bank processes.","Cut query turnaround time through agentic RAG with human-in-the-loop review.","Instrumented experimentation to validate quality before scaling."]},
-  {role:"Associate Product Manager / AI",org:"[Company Name]",period:"[2020 — 2023]",
-   summary:"Led end-to-end delivery of enterprise AI solutions, including the bank's first in-house GenAI POC and the iPal chatbot serving 100k weekly customer queries, driving measurable business impact, operational efficiency, and scalable customer experiences.",
-   impact:["Delivered AI products generating measurable business value and operational efficiency.","iPal Chatbot: Led development deployment of vendor-based-conversational AI solutions across multiple digital channels serving 100k weekly customer queries", "Successfuly completed POC for multi-lingual capabilities of chatbout using NLLB.","Instrumented bank's first Gen-AI POC- completely in-house.","Shipped structured extraction pipelines with strong accuracy and PII safeguards."]},
-  {role:"Associate Product Manager / AI",org:"[Company Name]",period:"[Year — Year]",
+  {role:"Product Manager / Gen AI & Agentic AI",org:"[ICICI Bank]",period:"[2023 — 2026]",
+   summary:"Led end-to-end delivery of enterprise AI solutions, driving measurable business impact, operational efficiency, and scalable customer experiences.",
+   impact:["Delivered AI products generating measurable business value and operational efficiency.","Instrumented bank's first Gen-AI POC- completely in-house.","Led development of Generative AI solutions for internal bank processes.","Cut query turnaround time through agentic RAG with human-in-the-loop review.","Instrumented experimentation to validate quality before scaling.","Shipped structured extraction pipelines with strong accuracy and PII safeguards."]},
+  {role:"Associate Product Manager / Conversational AI & RPA",org:"[Company Name]",period:"[2020 - 2023]",
    summary:"Delivered early AI products and the data and architecture foundations they relied on.",
-   impact:["Delivered AI products generating measurable business value and operational efficiency.","Translated technical architecture into clear, decision-ready narratives for leadership.","Shipped structured extraction pipelines with strong accuracy and PII safeguards."]},
+   impact:["Delivered AI products generating measurable business value and operational efficiency.", "iPal Chatbot: Led development deployment of vendor-based-conversational AI solutions across multiple digital channels serving 100k weekly customer queries","Successfuly completed POC for multi-lingual capabilities of chatbout using NLLB.","Translated technical architecture into clear, decision-ready narratives for leadership."]},
 ];
 const PROJECTS = [
   {name:"Trade Chatbot",tag:"Agentic RAG",
@@ -483,8 +480,8 @@ const WRITING = [
 const CONTACT = [
   {label:"LinkedIn",sub:"Connect with me",href:"#",icon:"M16 8a6 6 0 016 6v6h-4v-6a2 2 0 00-4 0v6h-4v-10h4v1.5A4 4 0 0116 8zM6 9H2v11h4zM4 3a2 2 0 100 4 2 2 0 000-4z",ext:true},
   {label:"GitHub",sub:"See the code",href:"https://github.com/manu00724/",icon:"M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21",ext:true},
-  {label:"Email",sub:"manvendra.rajput@example.com",href:"mailto:manvendra.rajput@example.com",icon:"M3 5h18v14H3zM3 7l9 6 9-6"},
-  {label:"Resume",sub:"Download PDF",href:"https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing",icon:"M12 3v12m0 0l-4-4m4 4l4-4M5 21h14",download:true},
+  {label:"Email",sub:"manurajput.00724@gmail.com",ahref:"mailto:manurajput.00724@gmail.com",icon:"M3 5h18v14H3zM3 7l9 6 9-6"},
+  {label:"Resume",sub:"Download PDF",ahref:"https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing",icon:"M12 3v12m0 0l-4-4m4 4l4-4M5 21h14",download:true},
 ];
 
 /* ====================== HELPERS ====================== */
