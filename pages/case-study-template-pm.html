@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study — [Project Name]</title>
+<meta name="description" content="[Project Name] — context, problem, decisions, architecture, evaluation, and measurable impact." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#060912;--text:#e8ecf6;--muted:#9aa3b8;--faint:#6b7488;
+    --teal:#5eead4;--indigo:#8896ff;--border:rgba(255,255,255,0.09);--border-strong:rgba(255,255,255,0.16);
+    --panel:rgba(255,255,255,0.035);--panel-2:rgba(255,255,255,0.06);
+    --display:'Space Grotesk',sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+    --maxw:860px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:
+      radial-gradient(900px 500px at 80% -10%, rgba(136,150,255,0.12), transparent 60%),
+      radial-gradient(700px 420px at 5% 0%, rgba(94,234,212,0.09), transparent 58%), var(--ink);
+    color:var(--text);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--teal);}
+  *:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px;}
+
+  .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 24px;background:rgba(6,9,18,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+  .back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--muted);text-decoration:none;}
+  .back:hover{color:var(--teal);}
+  .topbar-right{display:flex;gap:10px;}
+  .chip-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);padding:7px 12px;border-radius:8px;text-decoration:none;transition:.2s;}
+  .chip-link:hover{color:var(--teal);border-color:var(--teal);}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 24px 100px;}
+
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);}
+  h1{font-family:var(--display);font-size:clamp(2rem,5vw,2.7rem);font-weight:700;letter-spacing:-.02em;margin:12px 0 12px;}
+  .lede{color:var(--muted);font-size:1.12rem;max-width:640px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .meta-pill{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--border);padding:6px 12px;border-radius:999px;}
+
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:36px 0 8px;}
+  .metric{border:1px solid var(--border);border-radius:14px;padding:18px 16px;background:var(--panel);backdrop-filter:blur(10px);}
+  .metric b{font-family:var(--display);font-size:1.6rem;display:block;background:linear-gradient(120deg,var(--teal),var(--indigo));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .metric span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);}
+
+  .toc{margin:40px 0 8px;padding:18px 20px;border:1px solid var(--border);border-radius:14px;background:var(--panel);}
+  .toc-title{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin:0 0 10px;}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .toc a{display:flex;gap:8px;font-size:13.5px;color:var(--muted);text-decoration:none;}
+  .toc a:hover{color:var(--teal);}
+  .toc a span{font-family:var(--mono);color:var(--faint);}
+
+  section.block{margin-top:56px;scroll-margin-top:80px;}
+  .block-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;}
+  .block-num{font-family:var(--mono);font-size:12px;color:var(--teal);background:rgba(94,234,212,0.12);border:1px solid rgba(94,234,212,0.3);padding:4px 9px;border-radius:7px;flex:none;}
+  h2{font-family:var(--display);font-size:1.32rem;font-weight:600;margin:0;}
+  .block-sub{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin:6px 0 0 44px;}
+  p{color:var(--muted);} strong{color:var(--text);}
+  ul.std{color:var(--muted);padding-left:20px;margin:10px 0;} ul.std li{margin:7px 0;}
+
+  .goal-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem;}
+  .goal-table th,.goal-table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
+  .goal-table th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);font-weight:500;}
+  .goal-table td{color:var(--muted);}
+  .goal-table td.win{color:var(--teal);font-weight:600;font-family:var(--mono);font-size:.85rem;}
+
+  .decision{border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;background:var(--panel);}
+  .decision-q{font-weight:600;color:var(--text);font-size:.98rem;margin-bottom:10px;}
+  .decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .decision-col{border-left:2px solid var(--border-strong);padding-left:12px;}
+  .decision-col.chosen{border-left-color:var(--teal);}
+  .decision-col-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:5px;}
+  .decision-col.chosen .decision-col-label{color:var(--teal);}
+  .decision-col p{font-size:.87rem;margin:0;color:var(--muted);}
+  @media (max-width:560px){.decision-grid{grid-template-columns:1fr;}}
+
+  .figure{margin:16px 0;border:1px dashed rgba(255,255,255,0.2);border-radius:14px;min-height:240px;display:grid;place-items:center;color:var(--faint);font-family:var(--mono);font-size:12.5px;text-align:center;padding:24px;background:linear-gradient(180deg,rgba(136,150,255,0.05),rgba(94,234,212,0.03));}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--panel-2);border:1px solid var(--border);padding:6px 11px;border-radius:8px;}
+
+  .eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .eval-card{border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:var(--panel);}
+  .eval-card .lbl{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);}
+  .eval-card p{margin-top:6px;font-size:.88rem;}
+  @media (max-width:560px){.eval-grid{grid-template-columns:1fr;}}
+
+  .impact{margin-top:14px;padding:22px 24px;border-radius:16px;background:linear-gradient(120deg,rgba(94,234,212,0.14),rgba(136,150,255,0.14));border:1px solid rgba(94,234,212,0.25);}
+  .impact .kick{color:var(--teal);}
+  .impact ul{margin-top:10px;padding-left:20px;}
+  .impact li{color:var(--text);font-weight:500;font-size:.98rem;margin:8px 0;}
+
+  .retro-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;}
+  .retro-card{border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--panel);}
+  .retro-card .lbl{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:8px;display:block;}
+  .retro-card ul{margin:0;padding-left:18px;}
+  .retro-card li{font-size:.88rem;color:var(--muted);margin:6px 0;}
+  @media (max-width:560px){.retro-grid{grid-template-columns:1fr;}}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;text-decoration:none;}
+  .btn-p{background:linear-gradient(135deg,var(--teal),var(--indigo));color:#06121a;}
+  .btn-g{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:var(--text);}
+  hr{border:none;border-top:1px solid var(--border);margin:48px 0;}
+  .note{font-size:13px;color:var(--faint);}
+
+  @media (max-width:620px){
+    .metrics{grid-template-columns:1fr 1fr;}
+    .toc ol{grid-template-columns:1fr;}
+    .block-sub{margin-left:0;margin-top:4px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="../index.html">← Back to portfolio</a>
+  <div class="topbar-right">
+    <a class="chip-link" href="#" target="_blank" rel="noreferrer">Live demo ↗</a>
+    <a class="chip-link" href="#" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <p class="kick">Case study · [Category — e.g. Agentic RAG]</p>
+  <h1>[Project Name]</h1>
+  <p class="lede">[One or two sentences: what the product does, who it's for, and the core mechanism — written the way you'd pitch it in 15 seconds to a hiring panel.]</p>
+
+  <div class="meta-row">
+    <span class="meta-pill">Role: [Product Manager]</span>
+    <span class="meta-pill">Team: [e.g. 1 PM, 2 Engineers, 1 Data Scientist]</span>
+    <span class="meta-pill">Duration: [e.g. 3 months, discovery → GA]</span>
+    <span class="meta-pill">Status: [Shipped / In production]</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><b>[30 min]</b><span>[faster / query]</span></div>
+    <div class="metric"><b>[93%]</b><span>[field accuracy]</span></div>
+    <div class="metric"><b>[100+]</b><span>[hrs / month saved]</span></div>
+  </div>
+
+  <nav class="toc" aria-label="Case study sections">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#context"><span>01</span> Context</a></li>
+      <li><a href="#problem"><span>02</span> Problem &amp; cost</a></li>
+      <li><a href="#goals"><span>03</span> Goals &amp; success metrics</a></li>
+      <li><a href="#role"><span>04</span> My role &amp; process</a></li>
+      <li><a href="#decisions"><span>05</span> Key decisions &amp; trade-offs</a></li>
+      <li><a href="#architecture"><span>06</span> Architecture &amp; stack</a></li>
+      <li><a href="#evaluation"><span>07</span> Evaluation &amp; guardrails</a></li>
+      <li><a href="#results"><span>08</span> Results &amp; impact</a></li>
+      <li><a href="#retro"><span>09</span> Challenges &amp; what I'd do differently</a></li>
+      <li><a href="#learnings"><span>10</span> Key learnings</a></li>
+    </ol>
+  </nav>
+
+  <section class="block" id="context">
+    <div class="block-head"><span class="block-num">01</span><h2>Context</h2></div>
+    <p>[Set the scene: the business, the team, and the workflow that existed before this product. Who were the users — internal analysts, compliance officers, customers? What were they using before — manual review, spreadsheets, a legacy tool? Keep this to 3–4 sentences; it's scaffolding for the problem, not the main event.]</p>
+  </section>
+
+  <section class="block" id="problem">
+    <div class="block-head"><span class="block-num">02</span><h2>Problem &amp; cost</h2></div>
+    <p class="block-sub">Quantify the pain before proposing a fix — this is what separates a PM case study from an engineering one.</p>
+    <p>[Describe specifically what was broken and why existing tools or workflows couldn't solve it. Then quantify it:]</p>
+    <ul class="std">
+      <li><strong>Volume:</strong> [e.g. ~X emails / queries processed manually per week]</li>
+      <li><strong>Time cost:</strong> [e.g. Y minutes per item × volume = Z hours/month]</li>
+      <li><strong>Quality / risk cost:</strong> [e.g. error rate, compliance exposure, missed SLAs]</li>
+      <li><strong>Why "just add more people" didn't scale:</strong> [e.g. judgment-heavy task, regulated data, inconsistent formats]</li>
+    </ul>
+  </section>
+
+  <section class="block" id="goals">
+    <div class="block-head"><span class="block-num">03</span><h2>Goals &amp; success metrics</h2></div>
+    <p class="block-sub">What "done" looked like, defined before building — not backfilled after shipping.</p>
+    <table class="goal-table">
+      <thead><tr><th>Goal</th><th>Metric</th><th>Target</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>[Reduce manual effort]</td><td>[Hours / month]</td><td>[e.g. −50%]</td><td class="win">[100+ hrs/mo saved]</td></tr>
+        <tr><td>[Maintain output quality]</td><td>[Field-level accuracy]</td><td>[e.g. ≥90%]</td><td class="win">[93%]</td></tr>
+        <tr><td>[Faster turnaround]</td><td>[Time per query]</td><td>[e.g. −20 min]</td><td class="win">[−30 min]</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" id="role">
+    <div class="block-head"><span class="block-num">04</span><h2>My role &amp; process</h2></div>
+    <p>[What you personally owned, end to end. Name the cross-functional partners and how decisions got made.]</p>
+    <ul class="std">
+      <li><strong>Discovery:</strong> [e.g. shadowed analysts, mapped the manual workflow, identified the highest-leverage step to automate]</li>
+      <li><strong>Definition:</strong> [e.g. wrote the PRD, defined the evaluation rubric with [stakeholder], scoped MVP vs. v2]</li>
+      <li><strong>Build:</strong> [e.g. partnered with engineering on architecture decisions, ran weekly model-quality reviews]</li>
+      <li><strong>Launch:</strong> [e.g. piloted with N users, ran a phased rollout, defined the go/no-go bar]</li>
+    </ul>
+  </section>
+
+  <section class="block" id="decisions">
+    <div class="block-head"><span class="block-num">05</span><h2>Key decisions &amp; trade-offs</h2></div>
+    <p class="block-sub">The two or three calls that actually shaped the product — and what was given up each time.</p>
+
+    <div class="decision">
+      <p class="decision-q">[Decision 1 — e.g. "Should the agent auto-resolve, or always involve a human?"]</p>
+      <div class="decision-grid">
+        <div class="decision-col">
+          <p class="decision-col-label">Considered</p>
+          <p>[Option not chosen, e.g. fully autonomous resolution]</p>
+        </div>
+        <div class="decision-col chosen">
+          <p class="decision-col-label">Chosen — and why</p>
+          <p>[What you picked, e.g. human-in-the-loop on low-confidence cases, and the reasoning — risk tolerance, trust-building, audit requirements.]</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="decision">
+      <p class="decision-q">[Decision 2 — e.g. "Build vs. buy for the retrieval layer"]</p>
+      <div class="decision-grid">
+        <div class="decision-col">
+          <p class="decision-col-label">Considered</p>
+          <p>[Alternative approach and why it was tempting]</p>
+        </div>
+        <div class="decision-col chosen">
+          <p class="decision-col-label">Chosen — and why</p>
+          <p>[Final call and the constraint that drove it — latency, cost, data sensitivity, team skillset.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="architecture">
+    <div class="block-head"><span class="block-num">06</span><h2>Architecture &amp; stack</h2></div>
+    <p>[One paragraph translating the architecture into product terms — what happens to a request end to end, in plain language, before the diagram.]</p>
+    <div class="figure">Drop your architecture diagram here<br>(replace this block with an &lt;img&gt; or embedded SVG)</div>
+    <div class="tags">
+      <span class="tag">[LangGraph]</span><span class="tag">[Python]</span><span class="tag">[FastAPI]</span>
+      <span class="tag">[Qdrant]</span><span class="tag">[Postgres]</span><span class="tag">[GCP]</span>
+    </div>
+  </section>
+
+  <section class="block" id="evaluation">
+    <div class="block-head"><span class="block-num">07</span><h2>Evaluation &amp; guardrails</h2></div>
+    <p class="block-sub">How you knew it was working — and how it stayed safe in production. This is the section that proves AI-PM depth, not just AI enthusiasm.</p>
+    <div class="eval-grid">
+      <div class="eval-card"><span class="lbl">Golden set</span><p>[e.g. N hand-labeled examples used to score every model/prompt change before release.]</p></div>
+      <div class="eval-card"><span class="lbl">Core metric</span><p>[e.g. field-level accuracy, precision/recall on extraction, escalation rate.]</p></div>
+      <div class="eval-card"><span class="lbl">Guardrails</span><p>[e.g. PII redaction, confidence thresholds, query allow-lists for text-to-SQL.]</p></div>
+      <div class="eval-card"><span class="lbl">Human review loop</span><p>[e.g. % of cases escalated, how reviewer feedback fed back into prompts/training.]</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="results">
+    <div class="block-head"><span class="block-num">08</span><h2>Results &amp; impact</h2></div>
+    <div class="impact">
+      <p class="kick">Business impact</p>
+      <ul>
+        <li>[Headline result #1 — e.g. reduced turnaround time by ~30 minutes per query]</li>
+        <li>[Headline result #2 — e.g. 93% field-level accuracy, validated against the golden set]</li>
+        <li>[Headline result #3 — e.g. 100+ hours/month of manual effort reclaimed for higher-value work]</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="retro">
+    <div class="block-head"><span class="block-num">09</span><h2>Challenges &amp; what I'd do differently</h2></div>
+    <div class="retro-grid">
+      <div class="retro-card">
+        <span class="lbl">What was harder than expected</span>
+        <ul>
+          <li>[e.g. edge cases in unstructured input that broke extraction]</li>
+          <li>[e.g. getting stakeholder trust before automating a regulated step]</li>
+        </ul>
+      </div>
+      <div class="retro-card">
+        <span class="lbl">What I'd change next time</span>
+        <ul>
+          <li>[e.g. invest in the eval harness before the first model, not after]</li>
+          <li>[e.g. pilot with a smaller, noisier user group earlier]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="learnings">
+    <div class="block-head"><span class="block-num">10</span><h2>Key learnings</h2></div>
+    <ul class="std">
+      <li>[A transferable lesson about AI product work — not specific to this project — that you'd carry into the next one.]</li>
+      <li>[A second lesson, ideally about evaluation, trust-building, or scoping.]</li>
+    </ul>
+  </section>
+
+  <div class="cta-row">
+    <a class="btn btn-p" href="#" target="_blank" rel="noreferrer">Live demo →</a>
+    <a class="btn btn-g" href="#" target="_blank" rel="noreferrer">View on GitHub</a>
+  </div>
+
+  <hr />
+  <p class="note">This is a reusable template. Duplicate it as <strong>pages/&lt;project&gt;.html</strong>, fill in the bracketed fields, and the portfolio's <strong>Case study</strong> button will open it automatically.</p>
+</div>
+</body>
+</html>
