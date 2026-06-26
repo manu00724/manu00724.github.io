@@ -429,20 +429,20 @@ const STRENGTHS = [
   ["Stakeholder Management","M9 11a3 3 0 100-6 3 3 0 000 6zM3 20a6 6 0 0112 0M17 11a3 3 0 100-6M15 14a6 6 0 016 6"],
 ];
 const EXPERIENCE = [
-  {role:"Senior AI Product Manager",org:"[ICICI Bank]",period:"Present",
+  {role:"AI Product Manager",org:"[Company Name]",period:"Present",
    summary:"Own the AI product portfolio across GenAI and agentic systems — from discovery and prioritisation to launch and post-launch evaluation.",
    impact:["Built AI-powered compliance solutions that reduced manual effort by 100+ hours / month.","Defined evaluation frameworks and KPIs to keep LLM outputs accurate and audit-ready.","Aligned engineering, risk, and business stakeholders around a single AI roadmap."]},
-  {role:"Product Manager — Conversational AI",org:"[ICICI Bank]",period:"[2023 — 2026]",
+  {role:"Product Manager — Conversational AI",org:"[Company Name]",period:"[Year — Year]",
    summary:"Led conversational and retrieval-augmented products serving customers across multiple digital channels.",
-   impact:["Led development of Generative AI solutions for internal bank processes.","Cut query turnaround time through agentic RAG with human-in-the-loop review.","Instrumented experimentation to validate quality before scaling."]},
-  {role:"Associate Product Manager / AI",org:"[Company Name]",period:"[2020 — 2023]",
-   summary:"iPal Chatbot: Led development deployment of vendor-based-conversational AI solutions across multiple digital channels.", "Successfuly completed POC for multi-lingual capabilities of chatbout using NLLB.","Instrumented bank's first Gen-AI POC- completely in-house.",
+   impact:["Led deployment of conversational AI solutions across multiple digital channels.","Cut query turnaround time through agentic RAG with human-in-the-loop review.","Instrumented experimentation to validate quality before scaling."]},
+  {role:"Associate Product Manager / AI",org:"[Company Name]",period:"[Year — Year]",
+   summary:"Delivered early AI products and the data and architecture foundations they relied on.",
    impact:["Delivered AI products generating measurable business value and operational efficiency.","Translated technical architecture into clear, decision-ready narratives for leadership.","Shipped structured extraction pipelines with strong accuracy and PII safeguards."]},
 ];
 const PROJECTS = [
   {name:"Trade Chatbot",tag:"Agentic RAG",
    problem:"Trade-operations teams spent significant time per query digging through fragmented documentation and systems.",
-   solution:"An agentic RAG assistant built on LangGraph with persistent memory and human-in-the-loop checkpoints, so the agent plans, retrieves, and asks back the user if the query needs more input.",
+   solution:"An agentic RAG assistant built on LangGraph with persistent memory and human-in-the-loop checkpoints, so the agent plans, retrieves, and escalates to a human only when confidence is low.",
    stack:["Agentic RAG","LangGraph","HITL","Memory","LLMs","Qdrant"],
    impact:"Reduced turnaround time by ~30 minutes per query.",
    page:"pages/trade-chatbot.html", demo:"pages/trade-chatbot-demo.html", caseSample:true,
@@ -469,7 +469,7 @@ const PROJECTS = [
 const SKILLS = [
   {title:"AI & GenAI",icon:"M9 3h6v3h3v6h-3v3H9v-3H6V6h3z",items:["LLMs","RAG","Agentic AI","Prompt Engineering","AI Evaluation"]},
   {title:"Product",icon:"M3 17l5-5 4 4 7-7",items:["Roadmapping","Prioritization","KPI Definition","Experimentation","Stakeholder Management"]},
-  {title:"Technology",icon:"M21 16V8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5",items:["GCP","LangGraph","Docker","Qdrant","Redis","Postgres"]},
+  {title:"Technology",icon:"M21 16V8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5",items:["GCP","LangGraph","Python","SQL","FastAPI","Docker","Qdrant","Redis","Postgres"]},
 ];
 const WRITING = [
   {kind:"Article",title:"Designing Agentic RAG systems that know when to ask a human",blurb:"When human-in-the-loop is a feature, not a fallback — and how to instrument the hand-off.",page:""},
@@ -480,7 +480,7 @@ const WRITING = [
 const CONTACT = [
   {label:"LinkedIn",sub:"Connect with me",href:"#",icon:"M16 8a6 6 0 016 6v6h-4v-6a2 2 0 00-4 0v6h-4v-10h4v1.5A4 4 0 0116 8zM6 9H2v11h4zM4 3a2 2 0 100 4 2 2 0 000-4z",ext:true},
   {label:"GitHub",sub:"See the code",href:"https://github.com/manu00724/",icon:"M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21",ext:true},
-  {label:"Email",sub:"manvendra.rajput@example.com",href:"mailto:manurajput.00724@gmail.com",icon:"M3 5h18v14H3zM3 7l9 6 9-6"},
+  {label:"Email",sub:"manvendra.rajput@example.com",href:"mailto:manvendra.rajput@example.com",icon:"M3 5h18v14H3zM3 7l9 6 9-6"},
   {label:"Resume",sub:"Download PDF",href:"https://drive.google.com/file/d/1WnnsvQsTKObEY6napGo2U74SpCt-82Q7/view?usp=sharing",icon:"M12 3v12m0 0l-4-4m4 4l4-4M5 21h14",download:true},
 ];
 
