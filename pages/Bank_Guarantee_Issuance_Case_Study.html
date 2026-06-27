@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study — Bank Guarantee Issuance</title>
+<meta name="description" content="Bank Guarantee Issuance — context, problem, decisions, architecture, evaluation, and measurable impact." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#060912;--text:#e8ecf6;--muted:#9aa3b8;--faint:#6b7488;
+    --teal:#5eead4;--indigo:#8896ff;--border:rgba(255,255,255,0.09);--border-strong:rgba(255,255,255,0.16);
+    --panel:rgba(255,255,255,0.035);--panel-2:rgba(255,255,255,0.06);
+    --display:'Space Grotesk',sans-serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;
+    --maxw:860px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:
+      radial-gradient(900px 500px at 80% -10%, rgba(136,150,255,0.12), transparent 60%),
+      radial-gradient(700px 420px at 5% 0%, rgba(94,234,212,0.09), transparent 58%), var(--ink);
+    color:var(--text);font-family:var(--body);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--teal);}
+  *:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px;}
+
+  .topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 24px;background:rgba(6,9,18,0.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+  .back{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--muted);text-decoration:none;}
+  .back:hover{color:var(--teal);}
+  .topbar-right{display:flex;gap:10px;}
+  .chip-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--border);padding:7px 12px;border-radius:8px;text-decoration:none;transition:.2s;}
+  .chip-link:hover{color:var(--teal);border-color:var(--teal);}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 24px 100px;}
+
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);}
+  h1{font-family:var(--display);font-size:clamp(2rem,5vw,2.7rem);font-weight:700;letter-spacing:-.02em;margin:12px 0 12px;}
+  .lede{color:var(--muted);font-size:1.12rem;max-width:640px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .meta-pill{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--border);padding:6px 12px;border-radius:999px;}
+
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:36px 0 8px;}
+  .metric{border:1px solid var(--border);border-radius:14px;padding:18px 16px;background:var(--panel);backdrop-filter:blur(10px);}
+  .metric b{font-family:var(--display);font-size:1.6rem;display:block;background:linear-gradient(120deg,var(--teal),var(--indigo));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .metric span{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);}
+
+  .toc{margin:40px 0 8px;padding:18px 20px;border:1px solid var(--border);border-radius:14px;background:var(--panel);}
+  .toc-title{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);margin:0 0 10px;}
+  .toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .toc a{display:flex;gap:8px;font-size:13.5px;color:var(--muted);text-decoration:none;}
+  .toc a:hover{color:var(--teal);}
+  .toc a span{font-family:var(--mono);color:var(--faint);}
+
+  section.block{margin-top:56px;scroll-margin-top:80px;}
+  .block-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;}
+  .block-num{font-family:var(--mono);font-size:12px;color:var(--teal);background:rgba(94,234,212,0.12);border:1px solid rgba(94,234,212,0.3);padding:4px 9px;border-radius:7px;flex:none;}
+  h2{font-family:var(--display);font-size:1.32rem;font-weight:600;margin:0;}
+  .block-sub{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin:6px 0 0 44px;}
+  p{color:var(--muted);} strong{color:var(--text);}
+  ul.std{color:var(--muted);padding-left:20px;margin:10px 0;} ul.std li{margin:7px 0;}
+
+  .goal-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem;}
+  .goal-table th,.goal-table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
+  .goal-table th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);font-weight:500;}
+  .goal-table td{color:var(--muted);}
+  .goal-table td.win{color:var(--teal);font-weight:600;font-family:var(--mono);font-size:.85rem;}
+
+  .decision{border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;background:var(--panel);}
+  .decision-q{font-weight:600;color:var(--text);font-size:.98rem;margin-bottom:10px;}
+  .decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .decision-col{border-left:2px solid var(--border-strong);padding-left:12px;}
+  .decision-col.chosen{border-left-color:var(--teal);}
+  .decision-col-label{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:5px;}
+  .decision-col.chosen .decision-col-label{color:var(--teal);}
+  .decision-col p{font-size:.87rem;margin:0;color:var(--muted);}
+  @media (max-width:560px){.decision-grid{grid-template-columns:1fr;}}
+
+  .figure{margin:16px 0;border:1px dashed rgba(255,255,255,0.2);border-radius:14px;min-height:240px;display:grid;place-items:center;color:var(--faint);font-family:var(--mono);font-size:12.5px;text-align:center;padding:24px;background:linear-gradient(180deg,rgba(136,150,255,0.05),rgba(94,234,212,0.03));}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--panel-2);border:1px solid var(--border);padding:6px 11px;border-radius:8px;}
+
+  .eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .eval-card{border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:var(--panel);}
+  .eval-card .lbl{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);}
+  .eval-card p{margin-top:6px;font-size:.88rem;}
+  @media (max-width:560px){.eval-grid{grid-template-columns:1fr;}}
+
+  .impact{margin-top:14px;padding:22px 24px;border-radius:16px;background:linear-gradient(120deg,rgba(94,234,212,0.14),rgba(136,150,255,0.14));border:1px solid rgba(94,234,212,0.25);}
+  .impact .kick{color:var(--teal);}
+  .impact ul{margin-top:10px;padding-left:20px;}
+  .impact li{color:var(--text);font-weight:500;font-size:.98rem;margin:8px 0;}
+
+  .retro-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;}
+  .retro-card{border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--panel);}
+  .retro-card .lbl{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:8px;display:block;}
+  .retro-card ul{margin:0;padding-left:18px;}
+  .retro-card li{font-size:.88rem;color:var(--muted);margin:6px 0;}
+  @media (max-width:560px){.retro-grid{grid-template-columns:1fr;}}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;text-decoration:none;}
+  .btn-p{background:linear-gradient(135deg,var(--teal),var(--indigo));color:#06121a;}
+  .btn-g{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:var(--text);}
+  hr{border:none;border-top:1px solid var(--border);margin:48px 0;}
+  .note{font-size:13px;color:var(--faint);}
+
+  @media (max-width:620px){
+    .metrics{grid-template-columns:1fr 1fr;}
+    .toc ol{grid-template-columns:1fr;}
+    .block-sub{margin-left:0;margin-top:4px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="../index.html">← Back to portfolio</a>
+  <div class="topbar-right">
+    <a class="chip-link" href="#" target="_blank" rel="noreferrer">Live demo ↗</a>
+    <a class="chip-link" href="#" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <p class="kick">Case study · AI-powered Document Intelligence</p>
+  <h1>Bank Guarantee Issuance</h1>
+  <p class="lede">Built an AI-powered document intelligence solution to accelerate Bank Guarantee issuance by automating entity extraction, document validation, and onerous clause identification using multimodal and text LLMs with fuzzy matching.</p>
+
+  <div class="meta-row">
+    <span class="meta-pill">Role: AI Product Manager</span>
+    <span class="meta-pill">Team: 1 Product Manager, 2 AI Engineers, 2 Backend Engineers, 1 Frontend Engineer</span>
+    <span class="meta-pill">Duration: 3 months</span>
+    <span class="meta-pill">Status: Internal Production Pilot</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><b>30 min</b><span>faster / BG</span></div>
+    <div class="metric"><b>XX%</b><span>entity extraction</span></div>
+    <div class="metric"><b>55 min</b><span>baseline TAT</span></div>
+  </div>
+
+  <nav class="toc" aria-label="Case study sections">
+    <p class="toc-title">On this page</p>
+    <ol>
+      <li><a href="#context"><span>01</span> Context</a></li>
+      <li><a href="#problem"><span>02</span> Problem &amp; cost</a></li>
+      <li><a href="#goals"><span>03</span> Goals &amp; success metrics</a></li>
+      <li><a href="#role"><span>04</span> My role &amp; process</a></li>
+      <li><a href="#decisions"><span>05</span> Key decisions &amp; trade-offs</a></li>
+      <li><a href="#architecture"><span>06</span> Architecture &amp; stack</a></li>
+      <li><a href="#evaluation"><span>07</span> Evaluation &amp; guardrails</a></li>
+      <li><a href="#results"><span>08</span> Results &amp; impact</a></li>
+      <li><a href="#retro"><span>09</span> Challenges &amp; what I'd do differently</a></li>
+      <li><a href="#learnings"><span>10</span> Key learnings</a></li>
+    </ol>
+  </nav>
+
+  <section class="block" id="context">
+    <div class="block-head"><span class="block-num">01</span><h2>Context</h2></div>
+    <p>Relationship Managers and Operations teams manually validated Customer Requirement Lists (CRLs) against generated Bank Guarantees before issuance. The workflow involved extracting entities from scanned CRLs, verifying customer information in the BG, and reviewing legal clauses for compliance. This manual process was time-consuming, inconsistent, and difficult to scale.</p>
+  </section>
+
+  <section class="block" id="problem">
+    <div class="block-head"><span class="block-num">02</span><h2>Problem &amp; cost</h2></div>
+    <p class="block-sub">Quantify the pain before proposing a fix — this is what separates a PM case study from an engineering one.</p>
+    <p>The existing workflow relied on manual document review and comparison across multiple documents. Analysts manually extracted entities, validated customer details, and identified onerous clauses before every Bank Guarantee was issued.</p>
+    <ul class="std">
+      <li><strong>Volume:</strong> Hundreds of Bank Guarantees processed monthly</li>
+      <li><strong>Time cost:</strong> Average processing time of 55 minutes per Bank Guarantee</li>
+      <li><strong>Quality / risk cost:</strong> Risk of missed entity mismatches and non-standard contractual clauses</li>
+      <li><strong>Why "just add more people" didn't scale:</strong> Document formats varied significantly and required domain expertise</li>
+    </ul>
+  </section>
+
+  <section class="block" id="goals">
+    <div class="block-head"><span class="block-num">03</span><h2>Goals &amp; success metrics</h2></div>
+    <p class="block-sub">What "done" looked like, defined before building — not backfilled after shipping.</p>
+    <table class="goal-table">
+      <thead><tr><th>Goal</th><th>Metric</th><th>Target</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>Reduce review time</td><td>Processing time</td><td>-30 min</td><td class="win">~30 min reduction</td></tr>
+        <tr><td>[Maintain output quality]</td><td>[Field-level accuracy]</td><td>[e.g. ≥90%]</td><td class="win">XX%</td></tr>
+        <tr><td>Automate validation</td><td>Entity comparison</td><td>Reliable</td><td class="win">Implemented</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="block" id="role">
+    <div class="block-head"><span class="block-num">04</span><h2>My role &amp; process</h2></div>
+    <p>I led product discovery, solution design, prioritization, and delivery with AI, backend, and frontend engineers while working closely with business stakeholders.</p>
+    <ul class="std">
+      <li><strong>Discovery:</strong> Mapped the BG issuance workflow and identified manual review bottlenecks</li>
+      <li><strong>Definition:</strong> Defined entity schemas, clause categories, PRD, and MVP scope</li>
+      <li><strong>Build:</strong> Selected LLMs, designed validation workflow, and reviewed extraction quality</li>
+      <li><strong>Launch:</strong> Conducted UAT and iterative improvements before deployment</li>
+    </ul>
+  </section>
+
+  <section class="block" id="decisions">
+    <div class="block-head"><span class="block-num">05</span><h2>Key decisions &amp; trade-offs</h2></div>
+    <p class="block-sub">The two or three calls that actually shaped the product — and what was given up each time.</p>
+
+    <div class="decision">
+      <p class="decision-q">Should one model handle all document types?</p>
+      <div class="decision-grid">
+        <div class="decision-col">
+          <p class="decision-col-label">Considered</p>
+          <p>Single multimodal LLM for both CRLs and BGs</p>
+        </div>
+        <div class="decision-col chosen">
+          <p class="decision-col-label">Chosen — and why</p>
+          <p>Used Llama 3.2 Vision for CRL images and Gemma 3.0 for BG text because each model performed better on its input modality.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="decision">
+      <p class="decision-q">How should extracted entities be compared?</p>
+      <div class="decision-grid">
+        <div class="decision-col">
+          <p class="decision-col-label">Considered</p>
+          <p>Exact string matching</p>
+        </div>
+        <div class="decision-col chosen">
+          <p class="decision-col-label">Chosen — and why</p>
+          <p>Used Levenshtein distance to tolerate OCR noise and formatting differences in long address fields.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="architecture">
+    <div class="block-head"><span class="block-num">06</span><h2>Architecture &amp; stack</h2></div>
+    <p>CRL images are processed by Llama 3.2 Vision to extract structured entities. Generated Bank Guarantees are processed by Gemma 3.0 to extract entities and classify onerous clauses. Extracted entities are compared using Levenshtein distance and the results are presented in a review interface for human validation before approval.</p>
+    <div class="figure">Drop your architecture diagram here<br>(replace this block with an &lt;img&gt; or embedded SVG)</div>
+    <div class="tags">
+      <span class="tag">Llama 3.2 Vision</span><span class="tag">Gemma 3.0</span><span class="tag">Python</span>
+      <span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">GCP</span>
+    </div>
+  </section>
+
+  <section class="block" id="evaluation">
+    <div class="block-head"><span class="block-num">07</span><h2>Evaluation &amp; guardrails</h2></div>
+    <p class="block-sub">How you knew it was working — and how it stayed safe in production. This is the section that proves AI-PM depth, not just AI enthusiasm.</p>
+    <div class="eval-grid">
+      <div class="eval-card"><span class="lbl">Golden set</span><p>Representative BGs and CRLs validated by domain experts.</p></div>
+      <div class="eval-card"><span class="lbl">Core metric</span><p>Entity extraction accuracy, clause classification accuracy, comparison accuracy.</p></div>
+      <div class="eval-card"><span class="lbl">Guardrails</span><p>Confidence thresholds and mandatory reviewer validation before approval.</p></div>
+      <div class="eval-card"><span class="lbl">Human review loop</span><p>Reviewers validated extracted entities and clause classifications before issuance.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="results">
+    <div class="block-head"><span class="block-num">08</span><h2>Results &amp; impact</h2></div>
+    <div class="impact">
+      <p class="kick">Business impact</p>
+      <ul>
+        <li>Reduced Bank Guarantee processing time by ~30 minutes.</li>
+        <li>Automated extraction and validation across CRLs and BGs.</li>
+        <li>Standardized onerous clause identification and review.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="retro">
+    <div class="block-head"><span class="block-num">09</span><h2>Challenges &amp; what I'd do differently</h2></div>
+    <div class="retro-grid">
+      <div class="retro-card">
+        <span class="lbl">What was harder than expected</span>
+        <ul>
+          <li>Highly variable CRL layouts and scanned document quality.</li>
+          <li>Building confidence in AI-assisted validation for regulated workflows.</li>
+        </ul>
+      </div>
+      <div class="retro-card">
+        <span class="lbl">What I'd change next time</span>
+        <ul>
+          <li>Establish automated evaluation pipelines earlier.</li>
+          <li>Introduce confidence-based routing for high-confidence approvals.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="learnings">
+    <div class="block-head"><span class="block-num">10</span><h2>Key learnings</h2></div>
+    <ul class="std">
+      <li>Choosing specialized models for each modality often outperforms a single general-purpose model.</li>
+      <li>Enterprise AI products require explainability, evaluation, and human oversight to build trust.</li>
+    </ul>
+  </section>
+
+  <div class="cta-row">
+    <a class="btn btn-p" href="#" target="_blank" rel="noreferrer">Live demo →</a>
+    <a class="btn btn-g" href="#" target="_blank" rel="noreferrer">View on GitHub</a>
+  </div>
+
+  <hr />
+  <p class="note">This is a reusable template. Duplicate it as <strong>pages/&lt;project&gt;.html</strong>, fill in the bracketed fields, and the portfolio's <strong>Case study</strong> button will open it automatically.</p>
+</div>
+</body>
+</html>
