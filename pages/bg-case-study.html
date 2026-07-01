@@ -128,16 +128,16 @@
   <p class="lede">Built an AI-powered document intelligence solution to accelerate Bank Guarantee issuance by automating entity extraction, document validation, and onerous clause identification using multimodal and text LLMs with fuzzy matching.</p>
 
   <div class="meta-row">
-    <span class="meta-pill">Role: AI Product Manager</span>
-    <span class="meta-pill">Team: 1 Product Manager, 2 AI Engineers, 2 Backend Engineers, 1 Frontend Engineer</span>
-    <span class="meta-pill">Duration: 3 months</span>
+    <span class="meta-pill">Role: AI Product Manager-cum-Builder</span>
+    <span class="meta-pill">Team: 1 AI Product Manager-cum-Builder, 1 GCP Engineer</span>
+    <span class="meta-pill">Duration: 5 months</span>
     <span class="meta-pill">Status: Internal Production Pilot</span>
   </div>
 
   <div class="metrics">
-    <div class="metric"><b>30 min</b><span>faster / BG</span></div>
-    <div class="metric"><b>XX%</b><span>entity extraction</span></div>
-    <div class="metric"><b>55 min</b><span>baseline TAT</span></div>
+    <div class="metric"><b>20 min</b><span>faster / BG</span></div>
+    <div class="metric"><b>93%</b><span>entity extraction</span></div>
+    <div class="metric"><b>92%</b><span>RECALL</span></div>
   </div>
 
   <nav class="toc" aria-label="Case study sections">
@@ -163,23 +163,24 @@
 
   <section class="block" id="problem">
     <div class="block-head"><span class="block-num">02</span><h2>Problem &amp; cost</h2></div>
-    <p class="block-sub">Quantify the pain before proposing a fix — this is what separates a PM case study from an engineering one.</p>
+  <!--  <p class="block-sub">Quantify the pain before proposing a fix — this is what separates a PM case study from an engineering one.</p>
     <p>The existing workflow relied on manual document review and comparison across multiple documents. Analysts manually extracted entities, validated customer details, and identified onerous clauses before every Bank Guarantee was issued.</p>
-    <ul class="std">
-      <li><strong>Volume:</strong> Hundreds of Bank Guarantees processed monthly</li>
+    <ul class="std"> -->
+      <li><strong>Volume:</strong> 2k Bank Guarantees processed daily</li>
       <li><strong>Time cost:</strong> Average processing time of 55 minutes per Bank Guarantee</li>
-      <li><strong>Quality / risk cost:</strong> Risk of missed entity mismatches and non-standard contractual clauses</li>
+      <li><strong>Quality / risk cost:</strong> Risk of missed entity mismatches and non-standard/negative contractual clauses</li>
       <li><strong>Why "just add more people" didn't scale:</strong> Document formats varied significantly and required domain expertise</li>
+      <li><strong>Why "just use Traditional AI/ML" didn't work:</strong> Legal language made difficult for entity extraction & clause classification. </li>
     </ul>
   </section>
 
   <section class="block" id="goals">
     <div class="block-head"><span class="block-num">03</span><h2>Goals &amp; success metrics</h2></div>
-    <p class="block-sub">What "done" looked like, defined before building — not backfilled after shipping.</p>
+    <!-- <p class="block-sub">What "done" looked like, defined before building — not backfilled after shipping.</p> -->
     <table class="goal-table">
       <thead><tr><th>Goal</th><th>Metric</th><th>Target</th><th>Outcome</th></tr></thead>
       <tbody>
-        <tr><td>Reduce review time</td><td>Processing time</td><td>-30 min</td><td class="win">~30 min reduction</td></tr>
+        <tr><td>Reduce review time</td><td>Processing time</td><td>-30 min</td><td class="win">~20 min reduction</td></tr>
         <tr><td>[Maintain output quality]</td><td>[Field-level accuracy]</td><td>[e.g. ≥90%]</td><td class="win">XX%</td></tr>
         <tr><td>Automate validation</td><td>Entity comparison</td><td>Reliable</td><td class="win">Implemented</td></tr>
       </tbody>
