@@ -148,7 +148,8 @@
       <li><a href="#goals"><span>03</span> Goals &amp; success metrics</a></li>
       <li><a href="#role"><span>04</span> My role &amp; process</a></li>
       <li><a href="#decisions"><span>05</span> Key decisions &amp; trade-offs</a></li>
-      <li><a href="#architecture"><span>06</span> Architecture &amp; stack</a></li>
+      <!-- <li><a href="#architecture"><span>06</span> Architecture &amp; stack</a></li> -->
+      <li><a href="#architecture"><span>06</span> Gen AI Stack</a></li>
       <li><a href="#evaluation"><span>07</span> Evaluation &amp; guardrails</a></li>
       <li><a href="#results"><span>08</span> Results &amp; impact</a></li>
       <li><a href="#retro"><span>09</span> Challenges &amp; what I'd do differently</a></li>
@@ -232,9 +233,9 @@
   </section>
 
   <section class="block" id="architecture">
-    <div class="block-head"><span class="block-num">06</span><h2>Architecture &amp; stack</h2></div>
+    <div class="block-head"><span class="block-num">06</span><h2>Gen AI Stack</h2></div>
     <p>CRL images are processed by Llama 3.2 Vision to extract structured entities. Generated Bank Guarantees are processed by Gemma 3.0 to extract entities and classify onerous clauses. Extracted entities are compared using Levenshtein distance and the results are presented in a review interface for human validation before approval.</p>
-    <div class="figure">Drop your architecture diagram here<br>(replace this block with an &lt;img&gt; or embedded SVG)</div>
+    <!-- <div class="figure">Drop your architecture diagram here<br>(replace this block with an &lt;img&gt; or embedded SVG)</div> -->
     <div class="tags">
       <span class="tag">Llama 3.2 Vision</span><span class="tag">Gemma 3.0</span><span class="tag">Python</span>
       <span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">GCP</span>
@@ -257,7 +258,7 @@
     <div class="impact">
       <p class="kick">Business impact</p>
       <ul>
-        <li>Reduced Bank Guarantee processing time by ~30 minutes.</li>
+        <li>Reduced Bank Guarantee processing time by ~20 minutes.</li>
         <li>Automated extraction and validation across CRLs and BGs.</li>
         <li>Standardized onerous clause identification and review.</li>
       </ul>
